@@ -14,7 +14,7 @@ namespace Exigo.TeamServices.Data.Dto
         public int ProjectId { get; set; }
 
         [Column("TicketDetailId")]
-        public int? ProjectDetailId { get; set; }
+        public int? Id { get; set; }
 
         public DateTime EntryDate { get; set; }
         public bool IsPublic { get; set; }

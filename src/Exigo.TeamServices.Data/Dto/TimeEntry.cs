@@ -7,7 +7,9 @@ namespace Exigo.TeamServices.Data.Dto
     public class TimeEntry : IDto
     {
         public int CompanyId { get; set; }
-        public int TimeEntryId { get; set; }
+
+        [Column("TimeEntryId")]
+        public int? Id { get; set; }
 
         [Column("TicketDetailId")]
         public int ProjectDetailId { get; set; }

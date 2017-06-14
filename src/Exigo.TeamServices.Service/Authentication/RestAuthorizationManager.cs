@@ -28,7 +28,7 @@ namespace Exigo.TeamServices.Service.Authentication
                 Password = svcCredentials[1]
             };
 
-            return AuthenticateUser(user).UserId.HasValue;
+            return AuthenticateUser(user).Id.HasValue;
         }
 
         private User AuthenticateUser(User requestingUser)

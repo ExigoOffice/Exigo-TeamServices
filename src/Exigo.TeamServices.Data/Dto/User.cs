@@ -9,7 +9,8 @@ namespace Exigo.TeamServices.Data.Dto
     [TableName("Users")]
     public class User : IDto
     {
-        public int? UserId { get; set; }
+        [Column("UserId")]
+        public int? Id { get; set; }
 
         [Column("DepartmentTy")]
         public int DepartmentId { get; set; }

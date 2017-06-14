@@ -1,8 +1,13 @@
-﻿namespace Exigo.TeamServices.Data.Dto
+﻿using Exigo.TeamServices.Data.Repository.Base;
+
+using NPoco;
+
+namespace Exigo.TeamServices.Data.Dto
 {
-    public class Session
+    public class Session : IDto
     {
-        public int SessionId { get; set; }
+        [Column("SessionId")]
+        public int? Id { get; set; }
         public int UserId { get; set; }
         public AuthenticationToken Token { get; set; }
     }

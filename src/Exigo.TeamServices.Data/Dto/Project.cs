@@ -14,7 +14,7 @@ namespace Exigo.TeamServices.Data.Dto
         public int CompanyId { get; set; }
 
         [Column("TicketId")]
-        public int ProjectId { get; set; }
+        public int? Id { get; set; }
 
         [Column("ReferenceTicketId")]
         public int? ReferenceProjectId { get; set; }

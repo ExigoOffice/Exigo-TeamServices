@@ -8,7 +8,7 @@ namespace Exigo.TeamServices.Data.Dto
     public class Department : IDto
     {
         [Column("DepartmentTy")]
-        public int DepartmentId { get; set; }
+        public int? Id { get; set; }
 
         [Column("Descr")]
         public string Name { get; set; }

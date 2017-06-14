@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="DevelopmentManagement.ProjectServices" CodeBehind="ProjectServices.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Exigo.TeamServices.Service.ProjectServices" CodeBehind="ProjectServices.svc.cs" %>

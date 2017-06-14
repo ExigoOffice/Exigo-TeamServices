@@ -11,5 +11,8 @@ namespace Exigo.TeamServices.Data.Repository.Base
         void Delete(TParameter entry);
     }
 
-    public interface IDto { }
+    public interface IDto
+    {
+        int? Id { get; set; }
+    }
 }

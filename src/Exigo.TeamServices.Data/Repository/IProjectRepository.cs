@@ -29,7 +29,7 @@ namespace Exigo.TeamServices.Data.Repository
             using (var db = DbFactory.GetConnection())
             {
                 db.Update(project);
-                var splitWhere = project.Details.SplitWhere(pd => pd.ProjectDetailId.HasValue);
+                var splitWhere = project.Details.SplitWhere(pd => pd.Id.HasValue);
                 db.Update(splitWhere.SuccessList);
                 db.InsertBulk(splitWhere.FailureList);
             }
