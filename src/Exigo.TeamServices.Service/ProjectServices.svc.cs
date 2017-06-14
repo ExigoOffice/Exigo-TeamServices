@@ -75,7 +75,8 @@ namespace Exigo.TeamServices.Service
         public string GetNewProjects()
         {
             var projectRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectRepository>();
-            var results = ExecuteInTry<Project>(projectRepository.Where, p => p.ProjectStatusTy == ProjectStatusTy.NewSubmittion, JSON.ToJSON);
+            var results = ExecuteInTry<Project>(projectRepository.Where,
+                p => p.ProjectStatusTy == ProjectStatusTy.NewSubmittion, JSON.ToJSON);
             return results.ToJson();
         }
 
@@ -90,48 +91,51 @@ namespace Exigo.TeamServices.Service
         public string GetDetailsByParent(int id)
         {
             var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.ProjectId == id, JSON.ToJSON);
+            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.ProjectId == id,
+                JSON.ToJSON);
         }
 
         /// <inheritdoc />
         public string GetDetailsByUser(int id)
         {
             var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.EntryUserId == id, JSON.ToJSON);
+            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.EntryUserId == id,
+                JSON.ToJSON);
         }
 
         /// <inheritdoc />
         public string GetProjectsByCompany(int id)
         {
             var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.CompanyId == id, JSON.ToJSON);
+            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.CompanyId == id,
+                JSON.ToJSON);
         }
 
-        private string ExecuteInTry<TParamType, TReturn>(Func<TParamType, TReturn> @delegate, TParamType projects, 
-            Func<object, string> callback = null)
+        private string ExecuteInTry<TParamType, TReturn>(Func<TParamType, TReturn> @delegate, TParamType projects,
+                                                         Func<object, string> callback = null)
         {
             object responseObject = null;
 
             try
             {
                 responseObject = @delegate(projects);
-                responseObject = callback?.Invoke((TParamType)responseObject);
+                responseObject = callback?.Invoke((TParamType) responseObject);
             }
             catch (Exception ex)
             {
                 return new ServiceApiResponse
                 {
                     Success = false,
-                    JsonResponseObject = (string)responseObject,
+                    JsonResponseObject = (string) responseObject,
                     Exception = ex
                 }.ToJson();
             }
 
-            return new ServiceApiResponse { Success = true, JsonResponseObject = (string)responseObject }.ToJson();
+            return new ServiceApiResponse {Success = true, JsonResponseObject = (string) responseObject}.ToJson();
         }
 
-        private string ExecuteInTry<TParam>(Func<Expression<Func<TParam, bool>>, IEnumerable<TParam>> @delegate, 
-            Expression<Func<TParam, bool>> func, Func<object, string> callback)
+        private string ExecuteInTry<TParam>(Func<Expression<Func<TParam, bool>>, IEnumerable<TParam>> @delegate,
+                                            Expression<Func<TParam, bool>> func, Func<object, string> callback)
         {
             object responseObject = null;
 
@@ -150,7 +154,7 @@ namespace Exigo.TeamServices.Service
                 }.ToJson();
             }
 
-            return new ServiceApiResponse { Success = true, JsonResponseObject = (string)responseObject }.ToJson();
+            return new ServiceApiResponse {Success = true, JsonResponseObject = (string) responseObject}.ToJson();
         }
 
         private string ExecuteActionInTry<TParamType>(Action<TParamType> @delegate, TParamType projects)
@@ -165,7 +169,7 @@ namespace Exigo.TeamServices.Service
                 }.ToJson();
             }
 
-            return new ServiceApiResponse { Success = true }.ToJson();
+            return new ServiceApiResponse {Success = true}.ToJson();
         }
     }
 }

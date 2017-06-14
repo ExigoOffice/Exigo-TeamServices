@@ -21,9 +21,7 @@ namespace Exigo.TeamServices.Data.Core.Extensions
         {
             var returnArr = new[] {new List<TReturn>(), new List<TReturn>()};
             var lambda = partitionExpression.Compile();
-            foreach (var curItem in enumerable)
-                returnArr[lambda(curItem)? 0 : 1].Add(curItem);
-            
+            foreach (var curItem in enumerable) returnArr[lambda(curItem)? 0 : 1].Add(curItem);
 
             return new PartitionedList<TReturn> {SuccessList = returnArr[0], FailureList = returnArr[1]};
         }

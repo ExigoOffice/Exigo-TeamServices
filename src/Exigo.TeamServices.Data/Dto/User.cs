@@ -9,7 +9,7 @@ namespace Exigo.TeamServices.Data.Dto
     [TableName("Users")]
     public class User : IDto
     {
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         [Column("DepartmentTy")]
         public int DepartmentId { get; set; }
@@ -24,6 +24,7 @@ namespace Exigo.TeamServices.Data.Dto
         public bool IsDeleted { get; set; }
         public bool AllowApiaccess { get; set; }
         public DateTime? LastLoginDate { get; set; }
+        public string Password { get; set; }
 
         [Ignore]
         public Department Department { get; set; }

@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -53,9 +55,15 @@
     <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\PartitionedList.cs" />
     <Compile Include="Core\ProjectStatusTy.cs" />
+    <Compile Include="Authentication\Authentication.cs" />
+    <Compile Include="Dto\AuthenticationData.cs" />
+    <Compile Include="Dto\AuthenticationToken.cs" />
+    <Compile Include="Authentication\Cryptography.cs" />
     <Compile Include="Dto\Department.cs" />
+    <Compile Include="Authentication\Encryption.cs" />
     <Compile Include="Dto\Project.cs" />
     <Compile Include="Dto\ProjectDetail.cs" />
+    <Compile Include="Dto\Session.cs" />
     <Compile Include="Dto\TimeEntry.cs" />
     <Compile Include="Dto\User.cs" />
     <Compile Include="IoC\IRepositoryContainer.cs" />

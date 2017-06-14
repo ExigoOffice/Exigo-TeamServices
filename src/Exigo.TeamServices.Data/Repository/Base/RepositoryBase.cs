@@ -19,7 +19,7 @@ namespace Exigo.TeamServices.Data.Repository.Base
         /// <inheritdoc />
         public virtual string Create(T entry)
         {
-            using (var db = DbFactory.GetConnection()) return JSON.ToJSON(db.Insert(entry)); 
+            using (var db = DbFactory.GetConnection()) return JSON.ToJSON(db.Insert(entry));
         }
 
         /// <inheritdoc />

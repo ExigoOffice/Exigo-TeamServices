@@ -1,6 +1,8 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
 
+using Exigo.TeamServices.Data.Dto;
+
 namespace Exigo.TeamServices.Service
 {
     [ServiceContract]
@@ -9,7 +11,7 @@ namespace Exigo.TeamServices.Service
         #region POST
 
         /// <summary>
-        /// Inserts new records into the Ticket table.
+        ///     Inserts new records into the Ticket table.
         /// </summary>
         /// <param name="json">A json string of serialized Projects</param>
         /// <returns>System.String.</returns>
@@ -17,11 +19,11 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "POST",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects")]
+            UriTemplate = "/Projects/{json}")]
         string PostProjects(string json);
 
         /// <summary>
-        /// Inserts records into the TicketDetail table.
+        ///     Inserts records into the TicketDetail table.
         /// </summary>
         /// <param name="json">A json string of serialized Project Details</param>
         /// <returns>System.String.</returns>
@@ -29,11 +31,11 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "POST",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Detail")]
+            UriTemplate = "/Detail/{json}")]
         string PostDetail(string json);
 
         /// <summary>
-        /// Inserts a <see cref="TimeEntry"/> record into the database.
+        ///     Inserts a <see cref="TimeEntry" /> record into the database.
         /// </summary>
         /// <param name="json">The json.</param>
         /// <returns>System.String.</returns>
@@ -41,7 +43,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "POST",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "TimeEntry")]
+            UriTemplate = "/TimeEntry/{json}")]
         string PostTimeEntry(string json);
 
         #endregion
@@ -57,7 +59,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "UPDATE",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects")]
+            UriTemplate = "/Projects/{json}")]
         string UpdateProject(string json);
 
         /// <summary>
@@ -69,11 +71,11 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "UPDATE",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Details")]
+            UriTemplate = "/Details/{json}")]
         string UpdateDetial(string json);
 
         /// <summary>
-        /// Inserts a <see cref="TimeEntry"/> record into the database.
+        ///     Inserts a <see cref="TimeEntry" /> record into the database.
         /// </summary>
         /// <param name="json">The json.</param>
         /// <returns>System.String.</returns>
@@ -81,7 +83,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "UPDATE",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "TimeEntry")]
+            UriTemplate = "/TimeEntry/{json}")]
         string UpdateTimeEntry(string json);
 
         #endregion
@@ -96,7 +98,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects")]
+            UriTemplate = "/Projects")]
         string GetNewProjects();
 
         /// <summary>
@@ -108,7 +110,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects/{id}")]
+            UriTemplate = "/Projects/{id}")]
         string GetProject(int id);
 
         /// <summary>
@@ -120,7 +122,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Details/{id}")]
+            UriTemplate = "/Details/{id}")]
         string GetProjectDetail(int id);
 
         /// <summary>
@@ -132,7 +134,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects/Details/{id}")]
+            UriTemplate = "/Projects/Details/{id}")]
         string GetDetailsByParent(int id);
 
         /// <summary>
@@ -144,7 +146,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects/User/{id}")]
+            UriTemplate = "/Projects/User/{id}")]
         string GetDetailsByUser(int id);
 
         /// <summary>
@@ -156,7 +158,7 @@ namespace Exigo.TeamServices.Service
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Wrapped,
             Method = "GET",
             ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "Projects/Company/{id}")]
+            UriTemplate = "/Projects/Company/{id}")]
         string GetProjectsByCompany(int id);
 
         ///// <summary>
