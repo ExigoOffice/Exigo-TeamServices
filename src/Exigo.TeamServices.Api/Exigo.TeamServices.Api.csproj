@@ -63,7 +63,7 @@
     <Compile Include="Exceptions\ExigoTeamServiceCreateEntityException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Exigo.TeamServices.Data\Exigo.TeamServices.Data.csproj">
+    <ProjectReference Include="..\Exigo.TeamServices.Data\Exigo.TeamServices.Data.csproj">
       <Project>{5672DCC9-B480-437A-A196-13E7826D8869}</Project>
       <Name>Exigo.TeamServices.Data</Name>
     </ProjectReference>
