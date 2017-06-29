@@ -12,12 +12,14 @@ using NPoco.fastJSON;
 
 namespace Exigo.TeamServices.Service
 {
+    using static RepositoryContainer;
+
     public class ProjectServices : IProjectServices
     {
         /// <inheritdoc />
         public string PostProjects(string json)
         {
-            var repo = RepositoryContainer.DefaultContainer.FethInstance<IProjectRepository>();
+            var repo = DefaultContainer.FethInstance<IProjectRepository>();
             var projects = json.SerializeObjectCollection<Project>();
             return ExecuteActionInTry(repo.CreateMany, projects);
         }
@@ -25,41 +27,41 @@ namespace Exigo.TeamServices.Service
         /// <inheritdoc />
         public string PostDetail(string json)
         {
-            var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
+            var projectDetailRepository = DefaultContainer.FethInstance<IProjectDetailRepository>();
             var detail = json.SerializeObject<ProjectDetail>();
 
-            var timeEntryRepository = RepositoryContainer.DefaultContainer.FethInstance<ITimeEntryRepository>();
+            var timeEntryRepository = DefaultContainer.FethInstance<ITimeEntryRepository>();
             timeEntryRepository.CreateMany(detail.TimeEntries);
 
-            return ExecuteInTry(projectDetailRepository.Create, detail);
+            return ExecuteFuncInTry(projectDetailRepository.Create, detail);
         }
 
         /// <inheritdoc />
         public string PostTimeEntry(string json)
         {
-            var repo = RepositoryContainer.DefaultContainer.FethInstance<ITimeEntryRepository>();
+            var repo = DefaultContainer.FethInstance<ITimeEntryRepository>();
             var detail = json.SerializeObject<TimeEntry>();
-            return ExecuteInTry(repo.Create, detail);
+            return ExecuteFuncInTry(repo.Create, detail);
         }
 
         /// <inheritdoc />
         public string UpdateProject(string json)
         {
-            var projectRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectRepository>();
+            var projectRepository = DefaultContainer.FethInstance<IProjectRepository>();
             return ExecuteActionInTry(projectRepository.UpdateProjectWithDetails, json.SerializeObject<Project>());
         }
 
         /// <inheritdoc />
         public string UpdateDetial(string json)
         {
-            var detailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
+            var detailRepository = DefaultContainer.FethInstance<IProjectDetailRepository>();
             return ExecuteActionInTry(detailRepository.Update, json.SerializeObject<ProjectDetail>());
         }
 
         /// <inheritdoc />
         public string UpdateTimeEntry(string json)
         {
-            var timeEntryRepository = RepositoryContainer.DefaultContainer.FethInstance<ITimeEntryRepository>();
+            var timeEntryRepository = DefaultContainer.FethInstance<ITimeEntryRepository>();
             var entry = json.SerializeObject<TimeEntry>();
             return ExecuteActionInTry(timeEntryRepository.Update, entry);
         }
@@ -67,15 +69,15 @@ namespace Exigo.TeamServices.Service
         /// <inheritdoc />
         public string GetProject(int id)
         {
-            var projectRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectRepository>();
-            return ExecuteInTry(projectRepository.FetchById, id, JSON.ToJSON);
+            var projectRepository = DefaultContainer.FethInstance<IProjectRepository>();
+            return ExecuteFuncInTry(projectRepository.FetchById, id, JSON.ToJSON);
         }
 
         /// <inheritdoc />
         public string GetNewProjects()
         {
-            var projectRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectRepository>();
-            var results = ExecuteInTry<Project>(projectRepository.Where,
+            var projectRepository = DefaultContainer.FethInstance<IProjectRepository>();
+            var results = ExecuteGenericFuncInTry<Project>(projectRepository.Where,
                 p => p.ProjectStatusTy == ProjectStatusTy.NewSubmittion, JSON.ToJSON);
             return results.ToJson();
         }
@@ -83,35 +85,35 @@ namespace Exigo.TeamServices.Service
         /// <inheritdoc />
         public string GetProjectDetail(int id)
         {
-            var detailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry(detailRepository.FetchById, id, JSON.ToJSON);
+            var detailRepository = DefaultContainer.FethInstance<IProjectDetailRepository>();
+            return ExecuteFuncInTry(detailRepository.FetchById, id, JSON.ToJSON);
         }
 
         /// <inheritdoc />
         public string GetDetailsByParent(int id)
         {
-            var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.ProjectId == id,
+            var projectDetailRepository = DefaultContainer.FethInstance<IProjectDetailRepository>();
+            return ExecuteGenericFuncInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.ProjectId == id,
                 JSON.ToJSON);
         }
 
         /// <inheritdoc />
         public string GetDetailsByUser(int id)
         {
-            var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.EntryUserId == id,
+            var projectDetailRepository = DefaultContainer.FethInstance<IProjectDetailRepository>();
+            return ExecuteGenericFuncInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.EntryUserId == id,
                 JSON.ToJSON);
         }
 
         /// <inheritdoc />
         public string GetProjectsByCompany(int id)
         {
-            var projectDetailRepository = RepositoryContainer.DefaultContainer.FethInstance<IProjectDetailRepository>();
-            return ExecuteInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.CompanyId == id,
+            var projectDetailRepository = DefaultContainer.FethInstance<IProjectDetailRepository>();
+            return ExecuteGenericFuncInTry<ProjectDetail>(projectDetailRepository.Where, detail => detail.CompanyId == id,
                 JSON.ToJSON);
         }
 
-        private string ExecuteInTry<TParamType, TReturn>(Func<TParamType, TReturn> @delegate, TParamType projects,
+        private string ExecuteFuncInTry<TParamType, TReturn>(Func<TParamType, TReturn> @delegate, TParamType projects,
                                                          Func<object, string> callback = null)
         {
             object responseObject = null;
@@ -134,7 +136,7 @@ namespace Exigo.TeamServices.Service
             return new ServiceApiResponse {Success = true, JsonResponseObject = (string) responseObject}.ToJson();
         }
 
-        private string ExecuteInTry<TParam>(Func<Expression<Func<TParam, bool>>, IEnumerable<TParam>> @delegate,
+        private string ExecuteGenericFuncInTry<TParam>(Func<Expression<Func<TParam, bool>>, IEnumerable<TParam>> @delegate,
                                             Expression<Func<TParam, bool>> func, Func<object, string> callback)
         {
             object responseObject = null;

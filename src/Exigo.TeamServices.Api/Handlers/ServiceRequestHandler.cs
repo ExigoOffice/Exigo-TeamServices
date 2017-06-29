@@ -58,7 +58,7 @@ namespace Exigo.TeamServices.Api.Handlers
         /// <returns>Task&lt;T&gt;.</returns>
         public ServiceApiResponse ExecutePost<T>(T payload, string url) where T : IDto
         {
-            return SendRequest(CreateRequest(Method.POST, url, payload));
+            return SendRequest(CreateRequest(RequestMethod.POST, url, payload));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Exigo.TeamServices.Api.Handlers
         /// <returns>Task&lt;T&gt;.</returns>
         public ServiceApiResponse ExecuteGet(string urlWithParams)
         {
-            return SendRequest(CreateRequest(Method.GET, urlWithParams));
+            return SendRequest(CreateRequest(RequestMethod.GET, urlWithParams));
         }
 
         /// <summary>
@@ -98,13 +98,13 @@ namespace Exigo.TeamServices.Api.Handlers
         /// <summary>
         ///     Creates a get request.
         /// </summary>
-        /// <param name="method">The method.</param>
+        /// <param name="requestMethod">The method.</param>
         /// <param name="url">The URL.</param>
         /// <returns>IRestRequest.</returns>
-        private WebRequest CreateRequest(Method method, string url)
+        private WebRequest CreateRequest(RequestMethod requestMethod, string url)
         {
             var webReq = WebRequest.CreateHttp(url);
-            webReq.Method = Enum.GetName(typeof(Method), method);
+            webReq.Method = Enum.GetName(typeof(RequestMethod), requestMethod);
             webReq.ContentType = "application/json; charset=utf-8";
             return webReq;
         }
@@ -113,16 +113,16 @@ namespace Exigo.TeamServices.Api.Handlers
         ///     Creates a request with a body.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="method">The method.</param>
+        /// <param name="requestMethod">The method.</param>
         /// <param name="url">The URL.</param>
         /// <param name="payload">The payload.</param>
         /// <returns>IRestRequest.</returns>
-        private WebRequest CreateRequest<T>(Method method, string url, T payload) where T : IDto
+        private WebRequest CreateRequest<T>(RequestMethod requestMethod, string url, T payload) where T : IDto
         {
             var buffer = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload));
             var webReq = WebRequest.CreateHttp(url);
 
-            webReq.Method = Enum.GetName(typeof(Method), method);
+            webReq.Method = Enum.GetName(typeof(RequestMethod), requestMethod);
             webReq.ContentType = "application/json; charset=utf-8";
             webReq.ContentLength = buffer.Length;
             return webReq;

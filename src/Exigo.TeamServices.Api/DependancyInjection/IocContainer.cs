@@ -114,6 +114,7 @@ namespace Exigo.TeamServices.Api.DependancyInjection
             return registeredObject.Instance;
         }
 
+        [Obsolete("Deprciated", true)]
         private IEnumerable<object> FetchConstructorParameters(RegisteredObject registeredObject)
         {
             var constructorInfo = registeredObject.ConcreteType.GetConstructors().First();

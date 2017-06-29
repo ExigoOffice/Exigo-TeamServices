@@ -5,15 +5,15 @@ namespace Exigo.TeamServices.Api.DependancyInjection
     internal class RegisteredObject
     {
         internal readonly object[] Parameters;
-        internal Type TypeToResolve { get; private set; }
+        internal Type TypeToResolve { get; }
 
-        internal Type ConcreteType { get; private set; }
+        internal Type ConcreteType { get; }
 
         internal object Instance { get; private set; }
 
         internal Func<object> Initialization { get; set; }
 
-        internal LifeCycle LifeCycle { get; private set; }
+        internal LifeCycle LifeCycle { get; }
 
         internal RegisteredObject(Type typeToResolve, Type concreteType, LifeCycle lifeCycle, Func<object> init)
             : this(typeToResolve, concreteType, lifeCycle)

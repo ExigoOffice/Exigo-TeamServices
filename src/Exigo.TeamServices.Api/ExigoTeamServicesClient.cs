@@ -17,6 +17,7 @@ namespace Exigo.TeamServices.Api
 
         public ExigoTeamServicesClient(string username , string password)
         {
+            // TODO 
             _provider = new ServiceProvider(new ServiceRequestHandler(new Uri("TBD"), username, password));
         }
 
@@ -31,6 +32,7 @@ namespace Exigo.TeamServices.Api
     {
         public static void TestMethod()
         {
+            // TODO 
             var client = new ExigoTeamServicesClient("username","password");
 
             // Get new projects

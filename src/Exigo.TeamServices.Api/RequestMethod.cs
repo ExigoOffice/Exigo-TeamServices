@@ -1,5 +1,5 @@
 namespace Exigo.TeamServices.Api {
-    public enum Method
+    public enum RequestMethod
     {
         POST,
         UPDATE,
