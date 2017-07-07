@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "exigo-user-stories",
-    "version": "0.1.30",
+    "version": "0.1.32",
     "name": "Exigo User Stories",
     "description": "A management tool for exigo tickets.",
     "publisher": "jacobbass",
@@ -31,7 +31,7 @@
         "vso.work",
         "vso.code_write"
     ],
-     "files": [
+     "files": [ 
         {
             "path": "dist",
             "addressable": true

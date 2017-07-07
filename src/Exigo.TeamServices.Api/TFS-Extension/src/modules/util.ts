@@ -21,4 +21,10 @@ export class util {
         }
         return "";
     }
+
+    public static IsLoggedIn(){
+        var cookie = util.getCookie("exigoticketing")
+        console.log(cookie) //remove later
+        return cookie;
+    }
 }

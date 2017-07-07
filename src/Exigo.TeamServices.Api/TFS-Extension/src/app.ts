@@ -11,10 +11,13 @@ import {Login} from "./modules/login";
 
 
 exports.init = function(){
+    // Demo: allows you to access fields of the work item.
     WitService.WorkItemFormService.getService().then(function (workItemFormSvc) {
         workItemFormSvc.getFieldValue("TicketID").then(data =>{
+            // in this case we are accessing a custom field
            console.log(`TicketId:${data}`)
         }); 
     });
+    //initiates login script
     Login.Init();
 }
