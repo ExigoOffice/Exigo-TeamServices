@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <script src="../lib/VSS.SDK.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <!--<script src="node_modules/vss-web-extension-sdk/lib/VSS.SDK.min.js"></script>-->
+</head>
+
+<body>
+    
+        <div id="login-page" class="login-page" style="display:none">
+            <div class="form">
+                <div class="login-form">
+                    <input id="userName" type="text" placeholder="username" />
+                    <input id="password" type="password" placeholder="password" />
+                    <button type="button" id="login">login</button>
+                </div>
+            </div>
+        </div>
+   
+
+
+    <div id="main-content" class="main-content" style="display:none">
+        <div class="container-fluid">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Ticket Stuff
+                </div>
+            </div>
+            <div "detail-list" >
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    Detail
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    // Initialize the VSS sdk
+    VSS.init({
+        usePlatformScripts: true,
+        usePlatformStyles: true
+    });
+
+    VSS.require(["dist/app"], function (app) {
+        app.init();
+    });
+
+</script>
+
+</html>

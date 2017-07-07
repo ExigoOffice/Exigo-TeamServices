@@ -1,0 +1,19 @@
+ /// <reference types="vss-web-extension-sdk" />
+{
+    "compilerOptions": {
+        "module": "amd",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "target": "es5",
+        "rootDir": "src/",
+        "outDir": "dist/",
+        "types": [
+            "vss-web-extension-sdk"
+        ],
+        "lib": [
+      "dom",
+      "es5",
+      "es2015.promise"
+    ]	
+    }
+}
