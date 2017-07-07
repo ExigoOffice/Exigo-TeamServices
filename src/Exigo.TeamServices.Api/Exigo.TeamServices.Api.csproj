@@ -70,6 +70,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TFS-Extension\package.json" />
+    <None Include="TFS-Extension\tsconfig.json" />
+    <None Include="TFS-Extension\vss-extension.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="TFS-Extension\src\app.ts" />
+    <TypeScriptCompile Include="TFS-Extension\src\models\models.ts" />
+    <TypeScriptCompile Include="TFS-Extension\src\modules\login.ts" />
+    <TypeScriptCompile Include="TFS-Extension\src\modules\ticket.ts" />
+    <TypeScriptCompile Include="TFS-Extension\src\modules\util.ts" />
+    <TypeScriptCompile Include="TFS-Extension\src\services\TicketService.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TFS-Extension\static\app.html" />
+    <Content Include="TFS-Extension\static\css\style.css" />
+    <Content Include="TFS-Extension\static\images\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
